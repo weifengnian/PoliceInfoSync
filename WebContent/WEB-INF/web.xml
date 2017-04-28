@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" id="WebApp_ID" version="3.0">
-  <display-name>TZAppConnector</display-name>
+  <display-name>PoliceInfoSync</display-name>
   <description>App</description>
   
     <!-- 配置struts2拦截器 -->
@@ -19,7 +19,7 @@
 	
 	<filter>
 		<filter-name>CharsetEncodingFilter</filter-name>
-		<filter-class>com.tuzhi.app.web.CharsetEncodingFilter</filter-class>
+		<filter-class>com.tuzhi.pcinfo.web.CharsetEncodingFilter</filter-class>
     </filter>
 	
 	<!-- 配置Servlet -->
@@ -40,6 +40,10 @@
 		<param-name>contextConfigLocation</param-name>
 		<param-value>classpath:spring.xml</param-value>
 	</context-param>
+	
+	<listener>
+   		<listener-class>com.tuzhi.pcinfo.util.ServerListener</listener-class>
+    </listener>
 	
   <welcome-file-list>
     <welcome-file>index.html</welcome-file>

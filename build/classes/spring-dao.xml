@@ -5,23 +5,8 @@
        	   http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
 	<!-- 配置Sqlserver映射器 -->
 		
-	<!-- app用户信息-->
-	<bean id="appUserInfoDao" class="com.tuzhi.app.dao.AppUserInfoDao" scope="singleton">
-		<property name="sqlSessionTemplate" ref="sqlSession" />
-	</bean>
-	
-	<!-- 系统消息 -->
-	<bean id="systemMessagerDao" class="com.tuzhi.app.dao.SystemMessagerDao" scope="singleton">
-		<property name="sqlSessionTemplate" ref="sqlSession" />
-	</bean>
-	
-	<!-- 企业任务 -->
-	<bean id="enterpriseTaskDao" class="com.tuzhi.app.dao.EnterpriseTaskDao" scope="singleton">
-		<property name="sqlSessionTemplate" ref="sqlSession" />
-	</bean>
-	
-	<!-- 课程信息 -->
-	<bean id="coursesDao" class="com.tuzhi.app.dao.CoursesDao" scope="singleton">
+	<!-- 信息 -->
+	<bean id="policeInfoDao" class="com.tuzhi.pcinfo.dao.PoliceInfoDao" scope="singleton">
 		<property name="sqlSessionTemplate" ref="sqlSession" />
 	</bean>
 	

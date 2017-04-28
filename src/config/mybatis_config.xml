@@ -9,25 +9,11 @@
 		<setting name="useColumnLabel" value="true" />
 		<setting name="autoMappingBehavior" value="FULL" />
 	</settings>
-	
-	<plugins>
-		<!-- 物理分页 -->
-		<plugin interceptor="com.tuzhi.app.util.PaginationInterceptor" />
-	</plugins>
 
 	<mappers>
 	
-		<!-- 用户信息(企业OR个人) -->
-		<mapper resource="com/tuzhi/app/mapper/AppUserInfoDaoMapper.xml" />
-		
-		<!-- 系统消息 -->
-		<mapper resource="com/tuzhi/app/mapper/SystemMessagerDaoMapper.xml" />
-		
-		<!-- 企业任务 -->
-		<mapper resource="com/tuzhi/app/mapper/EnterpriseTaskDaoMapper.xml" />
-		
-		<!-- 课程信息 -->
-		<mapper resource="com/tuzhi/app/mapper/CoursesDaoMapper.xml" />
+		<!-- 警员信息 -->
+		<mapper resource="com/tuzhi/pcinfo/mapper/PoliceInfoDaoMapper.xml" />
 		
 	</mappers>
 	

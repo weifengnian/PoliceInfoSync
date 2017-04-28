@@ -6,17 +6,8 @@
 <struts>
 	<package name="manager" extends="struts-default" namespace="/manager">
 
-		<!-- 用户 -->
-		<action name="*Ur" method="{1}" class="appUserInfoAction"></action>
-		
-		<!-- 系统消息 -->
-		<action name="*Msg" method="{1}" class="systemMessagerAction"></action>
-		
-		<!-- 企业任务 -->
-		<action name="*Tsk" method="{1}" class="enterpriseTaskAction"></action>	
-		
-		<!-- 课程信息 -->
-		<action name="*Cus" method="{1}" class="coursesAction"></action>	
+		<!-- 信息 -->
+		<action name="*" method="{1}" class="policeInfoAction"></action>	
 		
 	</package>
 </struts>

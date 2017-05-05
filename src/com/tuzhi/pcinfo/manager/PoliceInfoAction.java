@@ -3,11 +3,19 @@ package com.tuzhi.pcinfo.manager;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 import javax.servlet.http.HttpServlet;
+
+import net.arnx.jsonic.JSON;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
 import com.tuzhi.pcinfo.entity.Atsmart_police_info;
 import com.tuzhi.pcinfo.service.IPoliceInfoService;
+import com.tuzhi.pcinfo.util.HttpClientUtil;
+import com.tuzhi.pcinfo.util.StringUtil;
+import com.tuzhi.pcinfo.util.TransUtil;
 
 /**
  * @Description: 
@@ -26,7 +34,7 @@ public class PoliceInfoAction extends HttpServlet {
 	private IPoliceInfoService policeInfoService;
 	
 	/**
-	 * 
+	 * 应用认证协议
 	 */
 	public void register(){
 		try {
@@ -36,6 +44,11 @@ public class PoliceInfoAction extends HttpServlet {
 			map.put("password", "test");
 			map.put("IMSI", "1234");
 			map.put("IMEI", "666");
+			String json = JSON.encode(map);
+			String resultJson = HttpClientUtil.jsonDoPost(TransUtil.REGISTER, json, TransUtil.ENCODING);
+			if(StringUtil.isBlank(resultJson)){
+				return;
+			}
 			
 			String status = "0";
 			String retMsg = "成功";

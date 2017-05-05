@@ -10,28 +10,28 @@ package com.tuzhi.pcinfo.entity;
 public class Atsmart_police_info {
 	
 	private double id; //
-	private String id_remote; //
-	private String police_id; //
-	private String police_name; //
-	private String organ_code; //
-	private double sex; //
-	private String card_id; //
-	private String duty; //
-	private String image_url; //
-	private String organization_id; //
-	private String synchro_time; //
-	private String update_time; //
+	private String id_remote; //sqlserver支持的一种编码
+	private String police_id; //警员编号
+	private String police_name; //警员姓名
+	private String organ_code; //组织编码
+	private double sex; //性别
+	private String card_id; //性别
+	private String duty; //职位
+	private String image_url; //头像
+	private String organization_id; //组织id
+	private String synchro_time; //同步时间
+	private String update_time; //更新时间
 	private double is_user; //
-	private String description; //
+	private String description; //描述
 	private String nation; //
-	private String politices_status; //
-	private String address; //
-	private String phone1; //
-	private String phone2; //
-	private String phone3; //
-	private String policetype; //
-	private String jingxian; //
-	
+	private String politices_status; //政治面貌
+	private String address; //住址
+	private String phone1; //电话1
+	private String phone2; //电话2
+	private String phone3; //电话3
+	private String policetype; //警种
+	private String jingxian; //警衔
+
 	
 	public double getId() {
 		return id;

@@ -1,5 +1,6 @@
 package com.tuzhi.pcinfo.util;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Timer;
@@ -7,8 +8,10 @@ import java.util.TimerTask;
 
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+
 import com.tuzhi.pcinfo.manager.PoliceInfoAction;
 
 public class ServerListener implements ServletContextListener {
@@ -46,26 +49,28 @@ public class ServerListener implements ServletContextListener {
 		       int day =calendar.get(Calendar.DAY_OF_MONTH);
 
 		       //定制每天的21:09:00执行，
-		       calendar.set(year, month, day, 16, 59, 00);
+		       calendar.set(year, month, day, 8, 40, 00);
 
 		       Date date = calendar.getTime();
 
 		       Timer timer = new Timer();
-
+		       
 		       //每天的date时刻执行task, 仅执行一次
-//			       timer.schedule(task, date);
-
-		       //每天的date时刻执行task，每隔2秒重复执行
-		       int period = 2 * 1000;
-		       timer.schedule(task, date, period);
+//		       timer.schedule(task, date);
+		       //86400
+		       //每天的date时刻执行task，每隔24小时重复执行  （1000毫秒=1秒）
+		       int period =  86400 * 1000;
+	    	   timer.schedule(task, date, period);
+		       
+//		       timer.scheduleAtFixedRate(task, date, period);
 		} catch (Exception e) {
 			// TODO: handle exception
 			log.info("-----Exception--ServerListener:"+e.getMessage());
 		}
 	}
 
-    public static void main(String[] args) {
-    	ServerListener s = new ServerListener();
-    	s.contextInitialized(null);
-    }
+//    public static void main(String[] args) {
+//    	ServerListener s = new ServerListener();
+//    	s.contextInitialized(null);
+//    }
 }

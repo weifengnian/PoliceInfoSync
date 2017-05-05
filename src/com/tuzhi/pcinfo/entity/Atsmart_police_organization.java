@@ -10,15 +10,15 @@ package com.tuzhi.pcinfo.entity;
 public class Atsmart_police_organization {
 	
 	private double id; //
-	private String organization_id; //
-	private String organ_code; //
-	private String p_org_id; //
-	private String organization_name; //
-	private String org_short_name; //
-	private String synchro_time; //
-	private String update_time; //
+	private String organization_id; //组织id
+	private String organ_code; //组织编码
+	private String p_org_id; //组织父节点id
+	private String organization_name; //组织名称
+	private String org_short_name; //组织简称
+	private String synchro_time; //同步时间
+	private String update_time; //更新时间
 	private double is_user; //
-	private String description; //
+	private String description; //描述
 	
 	
 	public double getId() {

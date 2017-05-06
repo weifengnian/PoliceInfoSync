@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper   
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="PoliceInfoDaoMapper">
+	<resultMap type="com.tuzhi.pcinfo.entity.Atsmart_police_info" id="resultPoliceInfo"/>
+	
+	<!-- 查询警员信息  -->
+	<select id="getPoliceInfo" parameterType="map" resultMap="resultPoliceInfo">
+		select a.* from atsmart_police_info a
+	</select>
+	
+</mapper>

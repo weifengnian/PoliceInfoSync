@@ -4,10 +4,234 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="PoliceInfoDaoMapper">
 	<resultMap type="com.tuzhi.pcinfo.entity.Atsmart_police_info" id="resultPoliceInfo"/>
+	<resultMap type="com.tuzhi.pcinfo.entity.Atsmart_police_organization" id="resultOrganization"/>
 	
 	<!-- 查询警员信息  -->
 	<select id="getPoliceInfo" parameterType="map" resultMap="resultPoliceInfo">
-		select a.* from atsmart_police_info a
+		select a.* from atsmart_police_info a 
+		 where 1=1 
+		 and police_id=#{police_id} and card_id=#{card_id}
 	</select>
+	
+	<!-- 删除警员信息 -->
+	<delete id="deletePoliceInfo" parameterType="map">
+		delete from atsmart_police_info where police_id=#{police_id} and card_id=#{card_id}
+	</delete>
+	
+	<!-- 添加警员信息 -->
+	<insert id="addPoliceInfo" parameterType="map">
+	  insert into atsmart_police_info
+	  (
+		<if test="id !=null and  id !='' ">
+			id,
+		</if>
+		<if test="id_remote !=null and  id_remote !='' ">
+			id_remote,
+		</if>
+		<if test="police_id !=null and  police_id !='' ">
+			police_id,
+		</if>
+		<if test="police_name !=null and  police_name !='' ">
+			police_name,
+		</if>
+		<if test="organ_code !=null and  organ_code !='' ">
+			organ_code,
+		</if>
+		<if test="sex !=null and  sex !='' ">
+			sex,
+		</if>
+		<if test="card_id !=null and  card_id !='' ">
+			card_id,
+		</if>
+		<if test="duty !=null and  duty !='' ">
+			duty,
+		</if>
+		<if test="image_url !=null and  image_url !='' ">
+			image_url,
+		</if>
+		<if test="organization_id !=null and  organization_id !='' ">
+			organization_id,
+		</if>
+		<if test="synchro_time !=null and  synchro_time !='' ">
+			synchro_time,
+		</if>
+		<if test="is_user !=null and  is_user !='' ">
+			is_user,
+		</if>
+		<if test="description !=null and  description !='' ">
+			description,
+		</if>
+		<if test="nation !=null and  nation !='' ">
+			nation,
+		</if>
+		<if test="politices_status !=null and  politices_status !='' ">
+			politices_status,
+		</if>
+		<if test="address !=null and  address !='' ">
+			address,
+		</if>
+		<if test="phone1 !=null and  phone1 !='' ">
+			phone1,
+		</if>
+		<if test="phone2 !=null and  phone2 !='' ">
+			phone2,
+		</if>
+		<if test="phone3 !=null and  phone3 !='' ">
+			phone3,
+		</if>
+		<if test="policetype !=null and  policetype !='' ">
+			policetype,
+		</if>
+		<if test="jingxian !=null and  jingxian !='' ">
+			jingxian,
+		</if>
+		<if test="update_time !=null and  update_time !='' ">
+			update_time
+		</if>
+	  )values(
+		<if test="id !=null and  id !='' ">
+			#{id},
+		</if>
+		<if test="id_remote !=null and  id_remote !='' ">
+			#{id_remote},
+		</if>
+		<if test="police_id !=null and  police_id !='' ">
+			#{police_id},
+		</if>
+		<if test="police_name !=null and  police_name !='' ">
+			#{police_name},
+		</if>
+		<if test="organ_code !=null and  organ_code !='' ">
+			#{organ_code},
+		</if>
+		<if test="sex !=null and  sex !='' ">
+			#{sex},
+		</if>
+		<if test="card_id !=null and  card_id !='' ">
+			#{card_id},
+		</if>
+		<if test="duty !=null and  duty !='' ">
+			#{duty},
+		</if>
+		<if test="image_url !=null and  image_url !='' ">
+			#{image_url},
+		</if>
+		<if test="organization_id !=null and  organization_id !='' ">
+			#{organization_id},
+		</if>
+		<if test="synchro_time !=null and  synchro_time !='' ">
+			#{synchro_time},
+		</if>
+		<if test="is_user !=null and  is_user !='' ">
+			#{is_user},
+		</if>
+		<if test="description !=null and  description !='' ">
+			#{description},
+		</if>
+		<if test="nation !=null and  nation !='' ">
+			#{nation},
+		</if>
+		<if test="politices_status !=null and  politices_status !='' ">
+			#{politices_status},
+		</if>
+		<if test="address !=null and  address !='' ">
+			#{address},
+		</if>
+		<if test="phone1 !=null and  phone1 !='' ">
+			#{phone1},
+		</if>
+		<if test="phone2 !=null and  phone2 !='' ">
+			#{phone2},
+		</if>
+		<if test="phone3 !=null and  phone3 !='' ">
+			#{phone3},
+		</if>
+		<if test="policetype !=null and  policetype !='' ">
+			#{policetype},
+		</if>
+		<if test="jingxian !=null and  jingxian !='' ">
+			#{jingxian},
+		</if>
+			getdate()
+	  )
+	</insert>
+	
+	<!-- 查询组织 -->
+	<select id="getOrganization" parameterType="map" resultMap="resultOrganization" >
+		select o.* from atsmart_police_organization o 
+		where 1=1 
+		and o.organization_id=#{organization_id}
+	</select>
+	
+	<!-- 删除组织 -->
+	<delete id="deleteOrganization" parameterType="map" >
+		delete atsmart_police_organization where organization_id=#{organization_id}
+	</delete>
+	
+	<!-- 添加组织 -->
+	<insert id="addOrganization" parameterType="map">
+	  insert into atsmart_police_organization
+	   (
+		<if test="id !=null and  id !='' ">
+			id,
+		</if>
+		<if test="organization_id !=null and  organization_id !='' ">
+			organization_id,
+		</if>
+		<if test="organ_code !=null and  organ_code !='' ">
+			organ_code,
+		</if>
+		<if test="p_org_id !=null and  p_org_id !='' ">
+			p_org_id,
+		</if>
+		<if test="organization_name !=null and  organization_name !='' ">
+			organization_name,
+		</if>
+		<if test="org_short_name !=null and  org_short_name !='' ">
+			org_short_name,
+		</if>
+		<if test="update_time !=null and  update_time !='' ">
+			update_time,
+		</if>
+		<if test="is_user !=null and  is_user !='' ">
+			is_user,
+		</if>
+		<if test="description !=null and  description !='' ">
+			description,
+		</if>
+		<if test="synchro_time !=null and  synchro_time !='' ">
+			synchro_time,
+		</if>
+	  )values(
+		<if test="id !=null and  id !='' ">
+			#{id},
+		</if>
+		<if test="organization_id !=null and  organization_id !='' ">
+			#{organization_id},
+		</if>
+		<if test="organ_code !=null and  organ_code !='' ">
+			#{organ_code},
+		</if>
+		<if test="p_org_id !=null and  p_org_id !='' ">
+			#{p_org_id},
+		</if>
+		<if test="organization_name !=null and  organization_name !='' ">
+			#{organization_name},
+		</if>
+		<if test="org_short_name !=null and  org_short_name !='' ">
+			#{org_short_name},
+		</if>
+		<if test="update_time !=null and  update_time !='' ">
+			#{update_time},
+		</if>
+		<if test="is_user !=null and  is_user !='' ">
+			#{is_user},
+		</if>
+		<if test="description !=null and  description !='' ">
+			#{description},
+		</if>
+		 getdate()
+	   )
+	</insert>
 	
 </mapper>

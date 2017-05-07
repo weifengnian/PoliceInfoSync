@@ -106,4 +106,7 @@
 	<import resource="spring-service.xml" />
 	<!-- dao层 -->
 	<import resource="spring-dao.xml" />
+	
+	<!-- 定时任务 -->
+	<import resource="spring-quarz.xml" />
 </beans>

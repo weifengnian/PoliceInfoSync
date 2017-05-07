@@ -15,7 +15,7 @@ public class Atsmart_police_info {
 	private String police_name; //警员姓名
 	private String organ_code; //组织编码
 	private double sex; //性别
-	private String card_id; //性别
+	private String card_id; //身份证号
 	private String duty; //职位
 	private String image_url; //头像
 	private String organization_id; //组织id

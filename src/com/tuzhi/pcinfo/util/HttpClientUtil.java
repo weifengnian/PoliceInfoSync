@@ -6,7 +6,6 @@ import java.util.Iterator;
 import java.util.List;  
 import java.util.Map;  
 import java.util.Map.Entry;  
-import javax.servlet.http.HttpServletRequest;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.http.HttpEntity;  

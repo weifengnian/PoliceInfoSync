@@ -10,7 +10,7 @@ package com.tuzhi.pcinfo.util;
 public class TransUtil {
 	
 	//
-	public static final String REGISTER = "http://220.164.163.216:14710/PoliceWeb/register"; 
+	public static final String REGISTER = "http://220.164.163.216:14710/PoliceWeb/"; 
 	
 	//编码类型
 	public static final String ENCODING = "UTF-8"; 

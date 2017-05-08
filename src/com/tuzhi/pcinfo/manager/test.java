@@ -30,7 +30,7 @@ public class test {
 //		{"result":[{"deptid":"995E99FB-90E2-4C2D-9F00-4FB8860285FD","pdeptid":"00000000-0000-0000-0000-000000000000","deptname":"曲靖市公安局","organCode":"530300000000"},{"deptid":"DE1A6C90-944B-45EF-8435-E8BCA0477B84","pdeptid":"00000000-0000-0000-0000-000000000000","deptname":"非公安机关","organCode":"53020000000000"}],"status":0}
 
 		
-//		 //police_list
+		 //police_list
 //        Map<String,String> map = new HashMap<String,String>();
 //        map.put("userid", "1");
 //        map.put("stamp", "rrr"); 
@@ -41,7 +41,7 @@ public class test {
 //		{"result":{"total":3,"list":[{"id":"532228198110021937","name":"郭龙文","policeid":"059984"},{"id":"532224197704190025","name":"严惠云","policeid":"025956"},{"id":"532228198011011952","name":"朱聪","policeid":"058699"}]},"status":0}
 
         
-//        //police_detail
+        //police_detail
 //        Map<String,String> map = new HashMap<String,String>();
 //        map.put("userid", "1");
 //        map.put("stamp", "rrr"); 
@@ -50,5 +50,7 @@ public class test {
 //        String json = JSON.encode(map);
 //        String resultJson = HttpClientUtil.jsonDoPost(TransUtil.REGISTER+"police_detail", json, TransUtil.ENCODING);
 //        System.out.println(resultJson);
+//        {"result":{"name":"严惠云","sex":0,"nation":"汉族","politicesstatus":"非中共党员","address":"云南省曲靖市陆良县南门东小街129号","phone1":"13887466800","phone2":"","phone3":"","deptid":"FAA32549-06FF-4DF3-8D8B-095D115A2608","deptname":"陆良县公安局","job":null,"level":null,"policetype":null,"policenumber":null,"jingxian":"三级警督","memo":"","updatetime":null},"status":0}
+
 	}
 }

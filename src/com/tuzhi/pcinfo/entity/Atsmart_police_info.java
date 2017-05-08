@@ -23,7 +23,7 @@ public class Atsmart_police_info {
 	private String update_time; //更新时间
 	private double is_user; //
 	private String description; //描述
-	private String nation; //
+	private String nation; //民族
 	private String politices_status; //政治面貌
 	private String address; //住址
 	private String phone1; //电话1

@@ -83,8 +83,8 @@ public class StringUtil {
 	}
 	
 	//组织明细
-	public static void pcOrganizationInfo(String resultJson,Map<String, String> map){
-		JSONObject jb = JSONObject.fromObject(resultJson);
+	public static void pcOrganizationInfo(JSONObject jb,Map<String, String> map){
+//		JSONObject jb = JSONObject.fromObject(resultJson);
 //		map.put("id", ""); //
 		map.put("organization_id", jb.getString("deptid")); //组织id
 		map.put("organ_code", jb.getString("organCode")); //组织编码
@@ -98,11 +98,10 @@ public class StringUtil {
 	} 
 	
 	//组织编号
-	public static void pcOrganization(Map<String, String> map1,String resultJson){
-		JSONObject jb = JSONObject.fromObject(resultJson);
+	public static void pcOrganization(Map<String, String> map1,JSONObject oj1){
 		map1.put("userid", "1");
 		map1.put("stamp", "rrr");
-		map1.put("topdeptid", jb.getString("deptid"));
+		map1.put("topdeptid", oj1.getString("deptid"));
 	} 
 	
 	public static void main(String[] args) {

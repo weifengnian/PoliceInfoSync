@@ -22,9 +22,9 @@
 	<insert id="addPoliceInfo" parameterType="map">
 	  insert into atsmart_police_info
 	  (
-		<if test="id !=null and  id !='' ">
-			id,
-		</if>
+<!-- 		<if test="id !=null and  id !='' "> -->
+<!-- 			id, -->
+<!-- 		</if> -->
 		<if test="id_remote !=null and  id_remote !='' ">
 			id_remote,
 		</if>
@@ -87,9 +87,9 @@
 		</if>
 			synchro_time
 	  )values(
-		<if test="id !=null and  id !='' ">
-			#{id},
-		</if>
+<!-- 		<if test="id !=null and  id !='' "> -->
+<!-- 			#{id}, -->
+<!-- 		</if> -->
 		<if test="id_remote !=null and  id_remote !='' ">
 			#{id_remote},
 		</if>
@@ -170,9 +170,9 @@
 	<insert id="addOrganization" parameterType="map">
 	  insert into atsmart_police_organization
 	   (
-		<if test="id !=null and  id !='' ">
-			id,
-		</if>
+<!-- 		<if test="id !=null and  id !='' "> -->
+<!-- 			id, -->
+<!-- 		</if> -->
 		<if test="organization_id !=null and  organization_id !='' ">
 			organization_id,
 		</if>
@@ -199,9 +199,9 @@
 		</if>
 			synchro_time
 	  )values(
-		<if test="id !=null and  id !='' ">
-			#{id},
-		</if>
+<!-- 		<if test="id !=null and  id !='' "> -->
+<!-- 			#{id}, -->
+<!-- 		</if> -->
 		<if test="organization_id !=null and  organization_id !='' ">
 			#{organization_id},
 		</if>
@@ -226,7 +226,7 @@
 		<if test="description !=null and  description !='' ">
 			#{description},
 		</if>
-		 getdate()
+		 	getdate()
 	   )
 	</insert>
 	

@@ -39,30 +39,20 @@ public class PoliceInfoService implements IPoliceInfoService {
 	}
 	
 	@Override
-	public String syncPoliceInfo(String JsonStr) {
+	public String syncPoliceInfo(String userid,String stamp) {
 		// TODO Auto-generated method stub
 		//结果码（00成功，99程序异常）
 		String strCode = "00";
-		
 		try {
-			
 			//组织构架协议（organization）
-	        Map<String,String> Ozmap = new HashMap<String,String>();
-	        Ozmap.put("userid", "1");
-	        Ozmap.put("stamp", "rrr"); 
-	        Ozmap.put("topdeptid", ""); 
-	        String Ozjson = JSON.encode(Ozmap);
-	        String rltOrganizationStr = HttpClientUtil.jsonDoPost(TransUtil.REGISTER+"organization", Ozjson, TransUtil.ENCODING);
-			Map<String, String> map = new HashMap<String, String>();
-			//构建组织信息（map）
-			StringUtil.pcOrganizationInfo(rltOrganizationStr,map);
-			//先删除组织
-			policeInfoDao.deleteOrganization(map);
-			//添加组织信息
-			policeInfoDao.addOrganization(map);
-			//添加警员信息
-			PoliceInfo(rltOrganizationStr);
-			
+	        Map<String,String> map = new HashMap<String,String>();
+	        map.put("userid", userid);
+	        map.put("stamp", stamp); 
+	        map.put("topdeptid", ""); 
+	        String json = JSON.encode(map);
+	        String rltOrganizationStr = HttpClientUtil.jsonDoPost(TransUtil.REGISTER+"organization", json, TransUtil.ENCODING);
+	        //组织
+	        organization(rltOrganizationStr);
 		} catch (Exception e) {
 			// TODO: handle exception
 			log.info("--Exception:"+e.getMessage());
@@ -71,37 +61,91 @@ public class PoliceInfoService implements IPoliceInfoService {
 		return strCode;
 	}
 	
-	public Map<String, String> PoliceInfo(String jsonStr){
+	//组织
+	public Map<String, String> organization(String jsonStr){
 		Map<String, String> map = new HashMap<String, String>();
 		JSONObject jsonObject  = JSONObject.fromObject(jsonStr);
 		String status = jsonObject.getString("status");
-		if("0".equals(status)){
-			String result = jsonObject.getString("result");
-			JSONObject jsonObject1  = JSONObject.fromObject(result);
-			String list = jsonObject1.getString("list");
-			JSONArray arr = JSONArray.fromObject(list);
+		String result = jsonObject.getString("result");
+		if("0".equals(status) && result.length()>2){
+			JSONArray arr = JSONArray.fromObject(result);
 			for (int i = 0; i < arr.size(); i++) {
 				JSONObject oj1 = arr.getJSONObject(i);
+				//删除，添加组织
+				adOgz(oj1);
 				Map<String, String> map1 = new HashMap<String, String>();
-				map1.put("userid", "1");
-				map1.put("stamp", "rrr"); 
-				map1.put("id", oj1.getString("id")); 
-				map1.put("policeid", oj1.getString("policeid"));
-				//查询 详细 明细
-				String json = JSON.encode(map1);
-			    String resultJson = HttpClientUtil.jsonDoPost(TransUtil.REGISTER+"police_detail", json, TransUtil.ENCODING);
-			    if(!StringUtil.isBlank(resultJson)){
-			    	JSONObject ob = JSONObject.fromObject(resultJson);
-			    	String stu = ob.getString("status");
-			    	if("0".equals(stu)){
-			    		String resultDetailJson = ob.getString("result");
-			    		StringUtil.pcMap(map1,resultDetailJson,map);
-			    		//删除警员信息
-			    		policeInfoDao.deletePoliceInfo(map);
-			    		//添加警员信息
-			    		policeInfoDao.addPoliceInfo(map);
-			    	}
-			    }
+				StringUtil.pcOrganization(map1,oj1);
+//				String json = JSON.encode(map);
+//		        String rltOrganizationStr = HttpClientUtil.jsonDoPost(TransUtil.REGISTER+"organization", json, TransUtil.ENCODING);
+//		        organization(rltOrganizationStr);
+			}
+		}
+		return map;
+	}
+	
+	//删除，添加组织
+	public void adOgz(JSONObject oj1){
+		Map<String, String> map = new HashMap<String, String>();
+		//构建组织信息（map）
+		StringUtil.pcOrganizationInfo(oj1,map);
+		//先删除组织
+		int num = policeInfoDao.deleteOrganization(map);
+		//添加组织信息
+		num = policeInfoDao.addOrganization(map);
+		
+		/**
+		 * 查询警员信息
+		 */
+		policeInfoList(oj1);
+	}
+	
+	//警员信息
+	public void policeInfoList(JSONObject oj1){
+		Map<String,String> map = new HashMap<String,String>();
+		map.put("userid", "1");
+		map.put("stamp", "rrr"); 
+		map.put("deptid", oj1.getString("deptid")); 
+		String json = JSON.encode(map);
+		String resultJson = HttpClientUtil.jsonDoPost(TransUtil.REGISTER+"police_list", json, TransUtil.ENCODING);
+		if(!StringUtil.isBlank(resultJson)){
+			policeInfoDetail(resultJson);
+		}
+	}
+	
+	//警员详细
+	public Map<String, String> policeInfoDetail(String jsonStr){
+		Map<String, String> map = new HashMap<String, String>();
+		JSONObject jsonObject  = JSONObject.fromObject(jsonStr);
+		String status = jsonObject.getString("status");
+		String result = jsonObject.getString("result");
+		if("0".equals(status)){
+			JSONObject jsonObject1  = JSONObject.fromObject(result);
+			String list = jsonObject1.getString("list");
+			if(list.length()>2){
+				JSONArray arr = JSONArray.fromObject(list);
+				for (int i = 0; i < arr.size(); i++) {
+					JSONObject oj1 = arr.getJSONObject(i);
+					Map<String, String> map1 = new HashMap<String, String>();
+					map1.put("userid", "1");
+					map1.put("stamp", "rrr"); 
+					map1.put("id", oj1.getString("id")); 
+					map1.put("policeid", oj1.getString("policeid"));
+					//查询 详细 明细
+					String json = JSON.encode(map1);
+				    String resultJson = HttpClientUtil.jsonDoPost(TransUtil.REGISTER+"police_detail", json, TransUtil.ENCODING);
+				    if(!StringUtil.isBlank(resultJson)){
+				    	JSONObject ob = JSONObject.fromObject(resultJson);
+				    	String stu = ob.getString("status");
+				    	String resultDetailJson = ob.getString("result");
+				    	if("0".equals(stu) && resultDetailJson.length()>2){
+				    		StringUtil.pcMap(map1,resultDetailJson,map);
+				    		//删除警员信息
+				    		int num = policeInfoDao.deletePoliceInfo(map);
+				    		//添加警员信息
+				    		num = policeInfoDao.addPoliceInfo(map);
+				    	}
+				    }
+				}
 			}
 		}
 		return map;

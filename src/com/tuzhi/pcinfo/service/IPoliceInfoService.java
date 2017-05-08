@@ -20,7 +20,7 @@ public interface IPoliceInfoService {
 	 * @param JsonStr
 	 * @return
 	 */
-	public String syncPoliceInfo(String JsonStr);
+	public String syncPoliceInfo(String userid,String stamp);
 	
 	/**
 	 * 获取警员信息

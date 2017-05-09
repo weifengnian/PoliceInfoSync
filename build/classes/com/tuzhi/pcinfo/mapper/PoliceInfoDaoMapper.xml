@@ -52,7 +52,7 @@
 		<if test="organization_id !=null and  organization_id !='' ">
 			organization_id,
 		</if>
-		<if test="update_time !=null and  update_time !='' ">
+		<if test="update_time !=null and  update_time !='' and update_time !='null' ">
 			update_time,
 		</if>
 		<if test="is_user !=null and  is_user !='' ">
@@ -117,7 +117,7 @@
 		<if test="organization_id !=null and  organization_id !='' ">
 			#{organization_id},
 		</if>
-		<if test="update_time !=null and  update_time !='' ">
+		<if test="update_time !=null and  update_time !='' and update_time !='null' ">
 			#{update_time},
 		</if>
 		<if test="is_user !=null and  is_user !='' ">

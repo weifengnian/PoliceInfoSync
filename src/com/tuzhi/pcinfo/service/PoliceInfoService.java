@@ -62,7 +62,7 @@ public class PoliceInfoService implements IPoliceInfoService {
 	}
 	
 	//组织
-	public Map<String, String> organization(String jsonStr){
+	public void organization(String jsonStr){
 		Map<String, String> map = new HashMap<String, String>();
 		JSONObject jsonObject  = JSONObject.fromObject(jsonStr);
 		String status = jsonObject.getString("status");
@@ -73,14 +73,14 @@ public class PoliceInfoService implements IPoliceInfoService {
 				JSONObject oj1 = arr.getJSONObject(i);
 				//删除，添加组织
 				adOgz(oj1);
-				Map<String, String> map1 = new HashMap<String, String>();
-				StringUtil.pcOrganization(map1,oj1);
-//				String json = JSON.encode(map);
-//		        String rltOrganizationStr = HttpClientUtil.jsonDoPost(TransUtil.REGISTER+"organization", json, TransUtil.ENCODING);
-//		        organization(rltOrganizationStr);
+//				Map<String, String> map1 = new HashMap<String, String>();
+				StringUtil.pcOrganization(map,oj1);
+				String json = JSON.encode(map);
+		        String rltOrganizationStr = HttpClientUtil.jsonDoPost(TransUtil.REGISTER+"organization", json, TransUtil.ENCODING);
+		        organization(rltOrganizationStr);
 			}
 		}
-		return map;
+		return;
 	}
 	
 	//删除，添加组织
@@ -96,11 +96,11 @@ public class PoliceInfoService implements IPoliceInfoService {
 		/**
 		 * 查询警员信息
 		 */
-		policeInfoList(oj1);
+		policeInfoList(oj1,map.get("organ_code"));
 	}
 	
 	//警员信息
-	public void policeInfoList(JSONObject oj1){
+	public void policeInfoList(JSONObject oj1,String organ_code){
 		Map<String,String> map = new HashMap<String,String>();
 		map.put("userid", "1");
 		map.put("stamp", "rrr"); 
@@ -108,12 +108,12 @@ public class PoliceInfoService implements IPoliceInfoService {
 		String json = JSON.encode(map);
 		String resultJson = HttpClientUtil.jsonDoPost(TransUtil.REGISTER+"police_list", json, TransUtil.ENCODING);
 		if(!StringUtil.isBlank(resultJson)){
-			policeInfoDetail(resultJson);
+			policeInfoDetail(resultJson,organ_code);
 		}
 	}
 	
 	//警员详细
-	public Map<String, String> policeInfoDetail(String jsonStr){
+	public Map<String, String> policeInfoDetail(String jsonStr,String organ_code){
 		Map<String, String> map = new HashMap<String, String>();
 		JSONObject jsonObject  = JSONObject.fromObject(jsonStr);
 		String status = jsonObject.getString("status");
@@ -138,7 +138,7 @@ public class PoliceInfoService implements IPoliceInfoService {
 				    	String stu = ob.getString("status");
 				    	String resultDetailJson = ob.getString("result");
 				    	if("0".equals(stu) && resultDetailJson.length()>2){
-				    		StringUtil.pcMap(map1,resultDetailJson,map);
+				    		StringUtil.pcMap(map1,resultDetailJson,map,organ_code);
 				    		//删除警员信息
 				    		int num = policeInfoDao.deletePoliceInfo(map);
 				    		//添加警员信息

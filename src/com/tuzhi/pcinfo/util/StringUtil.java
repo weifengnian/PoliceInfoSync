@@ -25,44 +25,45 @@ public class StringUtil {
 	 * @param jsonStr
 	 * @return
 	 */
-	public static Map<String, String> poiliceInfo(String jsonStr){
+	public static Map<String, String> poiliceInfo(String jsonStr,String organ_code){
 		Map<String, String> map = new HashMap<String, String>();
 		JSONObject jsonObject  = JSONObject.fromObject(jsonStr);
 		String status = jsonObject.getString("status");
-		if(!"0".equals(status)) return map;
 		String result = jsonObject.getString("result");
-		JSONObject jsonObject1  = JSONObject.fromObject(result);
-		String list = jsonObject1.getString("list");
-		JSONArray arr = JSONArray.fromObject(list);
-		for (int i = 0; i < arr.size(); i++) {
-			JSONObject oj1 = arr.getJSONObject(i);
-			Map<String, String> map1 = new HashMap<String, String>();
-			map1.put("userid", "1");
-			map1.put("stamp", "rrr"); 
-			map1.put("id", oj1.getString("id")); 
-			map1.put("policeid", oj1.getString("policeid"));
-			//查询 详细 明细
-			String json = JSON.encode(map1);
-		    String resultJson = HttpClientUtil.jsonDoPost(TransUtil.REGISTER+"police_detail", json, TransUtil.ENCODING);
-		    if(!StringUtil.isBlank(resultJson)){
-		    	JSONObject ob = JSONObject.fromObject(resultJson);
-		    	String stu = ob.getString("status");
-		    	if("0".equals(stu)){
-		    		String resultDetailJson = ob.getString("result");
-		    		StringUtil.pcMap(map1,resultDetailJson,map);
-		    	}
-		    }
+		if("0".equals(status) && result.length()>2){
+			JSONObject jsonObject1  = JSONObject.fromObject(result);
+			String list = jsonObject1.getString("list");
+			JSONArray arr = JSONArray.fromObject(list);
+			for (int i = 0; i < arr.size(); i++) {
+				JSONObject oj1 = arr.getJSONObject(i);
+				Map<String, String> map1 = new HashMap<String, String>();
+				map1.put("userid", "1");
+				map1.put("stamp", "rrr"); 
+				map1.put("id", oj1.getString("id")); 
+				map1.put("policeid", oj1.getString("policeid"));
+				//查询 详细 明细
+				String json = JSON.encode(map1);
+			    String resultJson = HttpClientUtil.jsonDoPost(TransUtil.REGISTER+"police_detail", json, TransUtil.ENCODING);
+			    if(!StringUtil.isBlank(resultJson)){
+			    	JSONObject ob = JSONObject.fromObject(resultJson);
+			    	String stu = ob.getString("status");
+			    	String resultDetailJson = ob.getString("result");
+			    	if("0".equals(stu) && resultDetailJson.length()>2){
+			    		StringUtil.pcMap(map1,resultDetailJson,map,organ_code);
+			    	}
+			    }
+			}
 		}
 		return map;
 	}
 
-	public static void pcMap(Map<String, String> map1,String resultJson,Map<String, String> map){
+	public static void pcMap(Map<String, String> map1,String resultJson,Map<String, String> map,String organ_code){
 		JSONObject jb = JSONObject.fromObject(resultJson); 
 //		map.put("id", ""); //
 		map.put("id_remote", ""); //sqlserver支持的一种编码
-		map.put("police_id", jb.getString("policenumber")); //警员编号
-		map.put("police_name", map1.get("name")); //警员姓名
-		map.put("organ_code", map1.get("policeid")); //组织编码
+		map.put("police_id", map1.get("policeid")); //警员编号
+		map.put("police_name", jb.getString("name")); //警员姓名
+		map.put("organ_code", organ_code); //组织编码
 		map.put("sex", "0".equals(jb.getString("sex"))?"2":jb.getString("sex")); //性别
 		map.put("card_id", map1.get("id")); //身份证号
 		map.put("duty", jb.getString("job")); //职位
@@ -112,7 +113,7 @@ public class StringUtil {
         String json = JSON.encode(map);
         String resultJson = HttpClientUtil.jsonDoPost(TransUtil.REGISTER+"police_list", json, TransUtil.ENCODING);
         System.out.println("police_list:"+resultJson);
-		StringUtil.poiliceInfo(resultJson);
+		StringUtil.poiliceInfo(resultJson,"123");
 	}
 
 //	{"result":{"total":3,"list":[{"id":"532228198110021937","name":"郭龙文","policeid":"059984"},{"id":"532224197704190025","name":"严惠云","policeid":"025956"},{"id":"532228198011011952","name":"朱聪","policeid":"058699"}]},"status":0}	
@@ -177,6 +178,15 @@ public class StringUtil {
 		// 去掉“-”符号
 		return s.substring(0, 8) + s.substring(9, 13) + s.substring(14, 18)
 		+ s.substring(19, 23) + s.substring(24);
+	}
+	
+	static int num = 0; 
+	public static int cnt(){
+		num++;
+		if(num==5){
+			num=-1;
+		}
+		return num;
 	}
 
 }

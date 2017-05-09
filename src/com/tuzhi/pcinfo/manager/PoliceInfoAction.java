@@ -37,7 +37,6 @@ public class PoliceInfoAction extends HttpServlet {
 	 */
 	public void register(){
 		try {
-			
 			//应用认证协议（Register）
 			Map<String,String> map = new HashMap<String,String>();
 			map.put("userid", "1");
@@ -51,16 +50,24 @@ public class PoliceInfoAction extends HttpServlet {
 			JSONObject jb = JSONObject.fromObject(rltRegisterStr);
 			String result = jb.getString("result");
 			JSONObject jbo = JSONObject.fromObject(result);
-			String resultStr = policeInfoService.syncPoliceInfo(map.get("userid"),jbo.getString("stamp").toString());
+			String resultStr = policeInfoService.syncPoliceInfo(map.get("userid"),jbo.getString("stamp"));
 			log.info("--resultStr:"+resultStr);
 			//如果不等于00，程序异常，重新执行该方法
 			if(!"00".equals(resultStr)){
+			  int num = StringUtil.cnt();
+				if(num==-1){
+					return;
+				}
 				PoliceInfoAction pa = new PoliceInfoAction();
 				pa.register();
 			}
 			return;
 		} catch (Exception e) {
 			// TODO: handle exception
+			int num = StringUtil.cnt();
+			if(num==-1){
+				return;
+			}
 			log.info("---register--Exception:"+e.getMessage());
 			PoliceInfoAction pa = new PoliceInfoAction();
 			pa.register();

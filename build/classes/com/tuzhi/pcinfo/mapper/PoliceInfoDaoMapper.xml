@@ -10,144 +10,144 @@
 	<select id="getPoliceInfo" parameterType="map" resultMap="resultPoliceInfo">
 		select a.* from atsmart_police_info a 
 		 where 1=1 
-		 and police_id=#{police_id} and card_id=#{card_id}
+		 and card_id=#{card_id}
 	</select>
 	
 	<!-- 删除警员信息 -->
 	<delete id="deletePoliceInfo" parameterType="map">
-		delete from atsmart_police_info where police_id=#{police_id} and card_id=#{card_id}
+		delete from atsmart_police_info where card_id=#{card_id}
 	</delete>
 	
 	<!-- 添加警员信息 -->
 	<insert id="addPoliceInfo" parameterType="map">
 	  insert into atsmart_police_info
 	  (
-<!-- 		<if test="id !=null and  id !='' "> -->
+<!-- 		<if test="id !=null and  id !='' and id !='null' "> -->
 <!-- 			id, -->
 <!-- 		</if> -->
-		<if test="id_remote !=null and  id_remote !='' ">
+		<if test="id_remote !=null and  id_remote !='' and id_remote !='null' ">
 			id_remote,
 		</if>
-		<if test="police_id !=null and  police_id !='' ">
+		<if test="police_id !=null and  police_id !='' and police_id !='null' ">
 			police_id,
 		</if>
-		<if test="police_name !=null and  police_name !='' ">
+		<if test="police_name !=null and  police_name !='' and police_name !='null' ">
 			police_name,
 		</if>
-		<if test="organ_code !=null and  organ_code !='' ">
+		<if test="organ_code !=null and  organ_code !='' and organ_code !='null' ">
 			organ_code,
 		</if>
-		<if test="sex !=null and  sex !='' ">
+		<if test="sex !=null and  sex !='' and sex !='null' ">
 			sex,
 		</if>
-		<if test="card_id !=null and  card_id !='' ">
+		<if test="card_id !=null and  card_id !='' and card_id !='null' ">
 			card_id,
 		</if>
-		<if test="duty !=null and  duty !='' ">
+		<if test="duty !=null and  duty !='' and duty !='null' ">
 			duty,
 		</if>
-		<if test="image_url !=null and  image_url !='' ">
+		<if test="image_url !=null and  image_url !='' and image_url !='null' ">
 			image_url,
 		</if>
-		<if test="organization_id !=null and  organization_id !='' ">
+		<if test="organization_id !=null and  organization_id !='' and organization_id !='null' ">
 			organization_id,
 		</if>
 		<if test="update_time !=null and  update_time !='' and update_time !='null' ">
 			update_time,
 		</if>
-		<if test="is_user !=null and  is_user !='' ">
+		<if test="is_user !=null and  is_user !='' and is_user !='null' ">
 			is_user,
 		</if>
-		<if test="description !=null and  description !='' ">
+		<if test="description !=null and  description !='' and description !='null' ">
 			description,
 		</if>
-		<if test="nation !=null and  nation !='' ">
+		<if test="nation !=null and  nation !='' and nation !='null' ">
 			nation,
 		</if>
-		<if test="politices_status !=null and  politices_status !='' ">
+		<if test="politices_status !=null and  politices_status !='' and politices_status !='null' ">
 			politices_status,
 		</if>
-		<if test="address !=null and  address !='' ">
+		<if test="address !=null and  address !='' and address !='null' ">
 			address,
 		</if>
-		<if test="phone1 !=null and  phone1 !='' ">
+		<if test="phone1 !=null and  phone1 !='' and phone1 !='null' ">
 			phone1,
 		</if>
-		<if test="phone2 !=null and  phone2 !='' ">
+		<if test="phone2 !=null and  phone2 !='' and phone2 !='null' ">
 			phone2,
 		</if>
-		<if test="phone3 !=null and  phone3 !='' ">
+		<if test="phone3 !=null and  phone3 !='' and phone3 !='null' ">
 			phone3,
 		</if>
-		<if test="policetype !=null and  policetype !='' ">
+		<if test="policetype !=null and  policetype !='' and policetype !='null' ">
 			policetype,
 		</if>
-		<if test="jingxian !=null and  jingxian !='' ">
+		<if test="jingxian !=null and  jingxian !='' and jingxian !='null' ">
 			jingxian,
 		</if>
 			synchro_time
 	  )values(
-<!-- 		<if test="id !=null and  id !='' "> -->
+<!-- 		<if test="id !=null and  id !='' and id !='null' "> -->
 <!-- 			#{id}, -->
 <!-- 		</if> -->
-		<if test="id_remote !=null and  id_remote !='' ">
+		<if test="id_remote !=null and  id_remote !='' and id_remote !='null' ">
 			#{id_remote},
 		</if>
-		<if test="police_id !=null and  police_id !='' ">
+		<if test="police_id !=null and  police_id !='' and police_id !='null' ">
 			#{police_id},
 		</if>
-		<if test="police_name !=null and  police_name !='' ">
+		<if test="police_name !=null and  police_name !='' and police_name !='null' ">
 			#{police_name},
 		</if>
-		<if test="organ_code !=null and  organ_code !='' ">
+		<if test="organ_code !=null and  organ_code !='' and organ_code !='null' ">
 			#{organ_code},
 		</if>
-		<if test="sex !=null and  sex !='' ">
+		<if test="sex !=null and  sex !='' and sex !='null' ">
 			#{sex},
 		</if>
-		<if test="card_id !=null and  card_id !='' ">
+		<if test="card_id !=null and  card_id !='' and card_id !='null' ">
 			#{card_id},
 		</if>
-		<if test="duty !=null and  duty !='' ">
+		<if test="duty !=null and  duty !='' and duty !='null' ">
 			#{duty},
 		</if>
-		<if test="image_url !=null and  image_url !='' ">
+		<if test="image_url !=null and  image_url !='' and image_url !='null' ">
 			#{image_url},
 		</if>
-		<if test="organization_id !=null and  organization_id !='' ">
+		<if test="organization_id !=null and  organization_id !='' and organization_id !='null' ">
 			#{organization_id},
 		</if>
 		<if test="update_time !=null and  update_time !='' and update_time !='null' ">
 			#{update_time},
 		</if>
-		<if test="is_user !=null and  is_user !='' ">
+		<if test="is_user !=null and  is_user !='' and is_user !='null' ">
 			#{is_user},
 		</if>
-		<if test="description !=null and  description !='' ">
+		<if test="description !=null and  description !='' and description !='null' ">
 			#{description},
 		</if>
-		<if test="nation !=null and  nation !='' ">
+		<if test="nation !=null and  nation !='' and nation !='null' ">
 			#{nation},
 		</if>
-		<if test="politices_status !=null and  politices_status !='' ">
+		<if test="politices_status !=null and  politices_status !='' and politices_status !='null' ">
 			#{politices_status},
 		</if>
-		<if test="address !=null and  address !='' ">
+		<if test="address !=null and  address !='' and address !='null' ">
 			#{address},
 		</if>
-		<if test="phone1 !=null and  phone1 !='' ">
+		<if test="phone1 !=null and  phone1 !='' and phone1 !='null' ">
 			#{phone1},
 		</if>
-		<if test="phone2 !=null and  phone2 !='' ">
+		<if test="phone2 !=null and  phone2 !='' and phone2 !='null' ">
 			#{phone2},
 		</if>
-		<if test="phone3 !=null and  phone3 !='' ">
+		<if test="phone3 !=null and  phone3 !='' and phone3 !='null' ">
 			#{phone3},
 		</if>
-		<if test="policetype !=null and  policetype !='' ">
+		<if test="policetype !=null and  policetype !='' and policetype !='null' ">
 			#{policetype},
 		</if>
-		<if test="jingxian !=null and  jingxian !='' ">
+		<if test="jingxian !=null and  jingxian !='' and jingxian !='null' ">
 			#{jingxian},
 		</if>
 			getdate()
@@ -170,60 +170,60 @@
 	<insert id="addOrganization" parameterType="map">
 	  insert into atsmart_police_organization
 	   (
-<!-- 		<if test="id !=null and  id !='' "> -->
+<!-- 		<if test="id !=null and  id !='' and id !='null' "> -->
 <!-- 			id, -->
 <!-- 		</if> -->
-		<if test="organization_id !=null and  organization_id !='' ">
+		<if test="organization_id !=null and  organization_id !='' and organization_id !='null' ">
 			organization_id,
 		</if>
-		<if test="organ_code !=null and  organ_code !='' ">
+		<if test="organ_code !=null and  organ_code !='' and organ_code !='null' ">
 			organ_code,
 		</if>
-		<if test="p_org_id !=null and  p_org_id !='' ">
+		<if test="p_org_id !=null and  p_org_id !='' and p_org_id !='null' ">
 			p_org_id,
 		</if>
-		<if test="organization_name !=null and  organization_name !='' ">
+		<if test="organization_name !=null and  organization_name !='' and organization_name !='null' ">
 			organization_name,
 		</if>
-		<if test="org_short_name !=null and  org_short_name !='' ">
+		<if test="org_short_name !=null and  org_short_name !='' and org_short_name !='null' ">
 			org_short_name,
 		</if>
-		<if test="update_time !=null and  update_time !='' ">
+		<if test="update_time !=null and  update_time !='' and update_time !='null' ">
 			update_time,
 		</if>
-		<if test="is_user !=null and  is_user !='' ">
+		<if test="is_user !=null and  is_user !='' and is_user !='null' ">
 			is_user,
 		</if>
-		<if test="description !=null and  description !='' ">
+		<if test="description !=null and  description !='' and description !='null' ">
 			description,
 		</if>
 			synchro_time
 	  )values(
-<!-- 		<if test="id !=null and  id !='' "> -->
+<!-- 		<if test="id !=null and  id !='' and id !='null' "> -->
 <!-- 			#{id}, -->
 <!-- 		</if> -->
-		<if test="organization_id !=null and  organization_id !='' ">
+		<if test="organization_id !=null and  organization_id !='' and organization_id !='null' ">
 			#{organization_id},
 		</if>
-		<if test="organ_code !=null and  organ_code !='' ">
+		<if test="organ_code !=null and  organ_code !='' and organ_code !='null' ">
 			#{organ_code},
 		</if>
-		<if test="p_org_id !=null and  p_org_id !='' ">
+		<if test="p_org_id !=null and  p_org_id !='' and p_org_id !='null' ">
 			#{p_org_id},
 		</if>
-		<if test="organization_name !=null and  organization_name !='' ">
+		<if test="organization_name !=null and  organization_name !='' and organization_name !='null' ">
 			#{organization_name},
 		</if>
-		<if test="org_short_name !=null and  org_short_name !='' ">
+		<if test="org_short_name !=null and  org_short_name !='' and org_short_name !='null' ">
 			#{org_short_name},
 		</if>
-		<if test="update_time !=null and  update_time !='' ">
+		<if test="update_time !=null and  update_time !='' and update_time !='null' ">
 			#{update_time},
 		</if>
-		<if test="is_user !=null and  is_user !='' ">
+		<if test="is_user !=null and  is_user !='' and is_user !='null' ">
 			#{is_user},
 		</if>
-		<if test="description !=null and  description !='' ">
+		<if test="description !=null and  description !='' and description !='null' ">
 			#{description},
 		</if>
 		 	getdate()

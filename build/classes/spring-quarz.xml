@@ -25,7 +25,7 @@
 		</property>
 		<property name="cronExpression">
 			<!--  每天凌晨2点同步一次  -->
-			<value>0 0/0 2 * * ?</value>
+			<value>0 0/0 4 * * ?</value>
 <!-- 			<value>0 0/1 * * * ?</value> -->
 		</property>
 	</bean>

@@ -2,12 +2,8 @@ package com.tuzhi.pcinfo.util;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
-
-import net.arnx.jsonic.JSON;
-import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
 /**
@@ -21,42 +17,6 @@ public class StringUtil {
 	
 //	private final static Logger log = LoggerFactory.getLogger(StringUtil.class);
 	
-	/**
-	 * @param jsonStr
-	 * @return
-	 */
-	public static Map<String, String> poiliceInfo(String jsonStr,String organ_code){
-		Map<String, String> map = new HashMap<String, String>();
-		JSONObject jsonObject  = JSONObject.fromObject(jsonStr);
-		String status = jsonObject.getString("status");
-		String result = jsonObject.getString("result");
-		if("0".equals(status) && result.length()>2){
-			JSONObject jsonObject1  = JSONObject.fromObject(result);
-			String list = jsonObject1.getString("list");
-			JSONArray arr = JSONArray.fromObject(list);
-			for (int i = 0; i < arr.size(); i++) {
-				JSONObject oj1 = arr.getJSONObject(i);
-				Map<String, String> map1 = new HashMap<String, String>();
-				map1.put("userid", "1");
-				map1.put("stamp", "rrr"); 
-				map1.put("id", oj1.getString("id")); 
-				map1.put("policeid", oj1.getString("policeid"));
-				//查询 详细 明细
-				String json = JSON.encode(map1);
-			    String resultJson = HttpClientUtil.jsonDoPost(TransUtil.REGISTER+"police_detail", json, TransUtil.ENCODING);
-			    if(!StringUtil.isBlank(resultJson)){
-			    	JSONObject ob = JSONObject.fromObject(resultJson);
-			    	String stu = ob.getString("status");
-			    	String resultDetailJson = ob.getString("result");
-			    	if("0".equals(stu) && resultDetailJson.length()>2){
-			    		StringUtil.pcMap(map1,resultDetailJson,map,organ_code);
-			    	}
-			    }
-			}
-		}
-		return map;
-	}
-
 	public static void pcMap(Map<String, String> map1,String resultJson,Map<String, String> map,String organ_code){
 		JSONObject jb = JSONObject.fromObject(resultJson); 
 //		map.put("id", ""); //
@@ -104,21 +64,6 @@ public class StringUtil {
 		map1.put("stamp", "rrr");
 		map1.put("topdeptid", oj1.getString("deptid"));
 	} 
-	
-	public static void main(String[] args) {
-        Map<String,String> map = new HashMap<String,String>();
-        map.put("userid", "1");
-        map.put("stamp", "rrr"); 
-        map.put("deptid", "FAA32549-06FF-4DF3-8D8B-095D115A2608"); 
-        String json = JSON.encode(map);
-        String resultJson = HttpClientUtil.jsonDoPost(TransUtil.REGISTER+"police_list", json, TransUtil.ENCODING);
-        System.out.println("police_list:"+resultJson);
-		StringUtil.poiliceInfo(resultJson,"123");
-	}
-
-//	{"result":{"total":3,"list":[{"id":"532228198110021937","name":"郭龙文","policeid":"059984"},{"id":"532224197704190025","name":"严惠云","policeid":"025956"},{"id":"532228198011011952","name":"朱聪","policeid":"058699"}]},"status":0}	
-//	{"result":{"name":"严惠云","sex":0,"nation":"汉族","politicesstatus":"非中共党员","address":"云南省曲靖市陆良县南门东小街129号","phone1":"13887466800","phone2":"","phone3":"","deptid":"FAA32549-06FF-4DF3-8D8B-095D115A2608","deptname":"陆良县公安局","job":null,"level":null,"policetype":null,"policenumber":null,"jingxian":"三级警督","memo":"","updatetime":null},"status":0}
-
 	
 	/**
 	 * 判断字符是否为空

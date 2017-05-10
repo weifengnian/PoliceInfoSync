@@ -8,11 +8,11 @@
 	<bean id="PoliceInfo" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
 		<!-- 所要调用的bean（类） -->
 		<property name="targetObject">
-           <bean class="com.tuzhi.pcinfo.manager.PoliceInfoAction"> </bean>
+		   <bean class="com.tuzhi.pcinfo.util.TimedTask"></bean>
 		</property>
 		<!--  类里面的方法名字 -->
 		<property name="targetMethod">
-			<value>register</value><!--targetMethod值待定 -->
+		   <value>registerRun</value><!--targetMethod值待定 -->
 		</property>
 	</bean>
 	
@@ -25,7 +25,7 @@
 		</property>
 		<property name="cronExpression">
 			<!--  每天凌晨2点同步一次  -->
-			<value>0 0/0 4 * * ?</value>
+			<value>0 0/0 2 * * ?</value>
 <!-- 			<value>0 0/1 * * * ?</value> -->
 		</property>
 	</bean>

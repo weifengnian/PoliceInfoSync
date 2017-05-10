@@ -183,7 +183,7 @@ public class StringUtil {
 	static int num = 0; 
 	public static int cnt(){
 		num++;
-		if(num==5){
+		if(num==10){
 			num=-1;
 		}
 		return num;

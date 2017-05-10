@@ -84,6 +84,7 @@ public class PoliceInfoService implements IPoliceInfoService {
 	}
 	
 	//删除，添加组织
+	@SuppressWarnings("unused")
 	public void adOgz(JSONObject oj1){
 		Map<String, String> map = new HashMap<String, String>();
 		//构建组织信息（map）
@@ -113,6 +114,7 @@ public class PoliceInfoService implements IPoliceInfoService {
 	}
 	
 	//警员详细
+	@SuppressWarnings("unused")
 	public Map<String, String> policeInfoDetail(String jsonStr,String organ_code){
 		Map<String, String> map = new HashMap<String, String>();
 		JSONObject jsonObject  = JSONObject.fromObject(jsonStr);

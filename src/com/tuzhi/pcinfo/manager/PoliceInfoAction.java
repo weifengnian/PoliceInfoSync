@@ -58,19 +58,36 @@ public class PoliceInfoAction extends HttpServlet {
 				if(num==-1){
 					return;
 				}
-				PoliceInfoAction pa = new PoliceInfoAction();
-				pa.register();
+				this.register();
 			}
 			return;
 		} catch (Exception e) {
 			// TODO: handle exception
+			log.info("---register--Exception:"+e.getMessage());
 			int num = StringUtil.cnt();
 			if(num==-1){
 				return;
 			}
-			log.info("---register--Exception:"+e.getMessage());
-			PoliceInfoAction pa = new PoliceInfoAction();
-			pa.register();
+			this.register();
+		}
+	}
+	
+	/**
+	 * 测试
+	 */
+	public void test(){
+		try {
+			//应用认证协议（Register）
+			Map<String,String> map = new HashMap<String,String>();
+			map.put("userid", "1");
+			map.put("app_id", "1"); //{"result":{"stamp":"rrr","app_name":"app1"},"status":0}
+			String json = JSON.encode(map);
+			String rltRegisterStr = HttpClientUtil.jsonDoPost(TransUtil.REGISTER+"Register", json, TransUtil.ENCODING);
+			log.info("--rltRegisterStr:"+rltRegisterStr);
+			return;
+		} catch (Exception e) {
+			// TODO: handle exception
+			log.info("---test--Exception:"+e.getMessage());
 		}
 	}
 	

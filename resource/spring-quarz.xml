@@ -4,7 +4,7 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd">
 	<!-- Spring 定时任务设置 -->
 
-	<!-- 定时任务 -->
+	<!-- 定时任务1 -->
 	<bean id="PoliceInfo" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
 		<!-- 所要调用的bean（类） -->
 		<property name="targetObject">
@@ -24,9 +24,56 @@
 			<ref local="PoliceInfo" />
 		</property>
 		<property name="cronExpression">
-			<!--  每天凌晨2点同步一次  -->
+			<value>0 0/0 3 * * ?</value>
+		</property>
+	</bean>
+	
+	<!-- 定时任务2 -->
+	<bean id="PoliceInfo_tb" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<!-- 所要调用的bean（类） -->
+		<property name="targetObject">
+		   <bean class="com.tuzhi.pcinfo.manager.PoliceInfoAction"></bean>
+		</property>
+		<!--  类里面的方法名字 -->
+		<property name="targetMethod">
+		   <value>plice_info</value><!--targetMethod值待定 -->
+		</property>
+	</bean>
+	
+	<!-- 定义类（PoliceInfoAction）的方法在何时执行 -->
+	<!-- PoliceInfoAction名称待定 -->
+	<bean id="PoliceInfoAction_tb" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<!--  计划中的JobDetail -->
+		<property name="jobDetail">
+			<ref local="PoliceInfo_tb" />
+		</property>
+		<property name="cronExpression">
 			<value>0 0/0 2 * * ?</value>
-<!-- 			<value>0 0/1 * * * ?</value> -->
+		</property>
+	</bean>
+	
+	
+	<!-- 定时任务3 -->
+	<bean id="organaization" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<!-- 所要调用的bean（类） -->
+		<property name="targetObject">
+		   <bean class="com.tuzhi.pcinfo.manager.PoliceInfoAction"></bean>
+		</property>
+		<!--  类里面的方法名字 -->
+		<property name="targetMethod">
+		   <value>organaization</value><!--targetMethod值待定 -->
+		</property>
+	</bean>
+	
+	<!-- 定义类（PoliceInfoAction）的方法在何时执行 -->
+	<!-- PoliceInfoAction名称待定 -->
+	<bean id="organaization_tb" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<!--  计划中的JobDetail -->
+		<property name="jobDetail">
+			<ref local="organaization" />
+		</property>
+		<property name="cronExpression">
+			<value>0 25 2 * * ?</value>
 		</property>
 	</bean>
 	
@@ -37,6 +84,8 @@
 		<property name="triggers">
 			<list>
 				<ref local="PoliceInfoAction" />
+				<ref local="PoliceInfoAction_tb" />
+				<ref local="organaization_tb" />
 			</list>
 		</property>
 	</bean>

@@ -1,16 +1,20 @@
 package com.tuzhi.pcinfo.manager;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletResponse;
 
 import net.arnx.jsonic.JSON;
 import net.sf.json.JSONObject;
 
+import org.apache.struts2.ServletActionContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.tuzhi.pcinfo.entity.Atsmart_police_info;
 import com.tuzhi.pcinfo.service.IPoliceInfoService;
 import com.tuzhi.pcinfo.util.HttpClientUtil;
 import com.tuzhi.pcinfo.util.StringUtil;
@@ -72,11 +76,44 @@ public class PoliceInfoAction extends HttpServlet {
 		}
 	}
 	
+	public void plice_info(){
+		try {
+			//应用认证协议（Register）
+			Map<String,String> map = new HashMap<String,String>();
+			map.put("123", "123");
+			String json = JSON.encode(map);
+			String rltRegisterStr = HttpClientUtil.jsonDoPost(TransUtil.REGISTER+"plice_info_tb", json, TransUtil.ENCODING);
+			log.info("--plice_info:"+rltRegisterStr);
+			return;
+		} catch (Exception e) {
+			// TODO: handle exception
+			log.info("---plice_info--Exception:"+e.getMessage());
+		}
+	}
+	
+	public void organaization(){
+		try {
+			//应用认证协议（Register）
+			Map<String,String> map = new HashMap<String,String>();
+			map.put("123", "123");
+			String json = JSON.encode(map);
+			String rltRegisterStr = HttpClientUtil.jsonDoPost(TransUtil.REGISTER+"organaization_tb", json, TransUtil.ENCODING);
+			log.info("--organaization:"+rltRegisterStr);
+			return;
+		} catch (Exception e) {
+			// TODO: handle exception
+			log.info("---organaization--Exception:"+e.getMessage());
+		}
+	}
+	
 	/**
 	 * 测试
 	 */
-	public void test(){
+	public void testPoliceUrl(){
 		try {
+			HttpServletResponse response = ServletActionContext.getResponse();
+			response.setCharacterEncoding("UTF-8");
+			response.setContentType("application/json; charset=utf-8");
 			//应用认证协议（Register）
 			Map<String,String> map = new HashMap<String,String>();
 			map.put("userid", "1");
@@ -84,6 +121,34 @@ public class PoliceInfoAction extends HttpServlet {
 			String json = JSON.encode(map);
 			String rltRegisterStr = HttpClientUtil.jsonDoPost(TransUtil.REGISTER+"Register", json, TransUtil.ENCODING);
 			log.info("--rltRegisterStr:"+rltRegisterStr);
+			if(rltRegisterStr.length()>10){
+				response.getWriter().write("{\"status\":\"00\",\"retMsg\":\"成功,'"+rltRegisterStr+"'\"}");
+			}else{
+				response.getWriter().write("{\"status\":\"01\",\"retMsg\":\"失败，地址无法访问到数据\"}");			
+			}
+			return;
+		} catch (Exception e) {
+			// TODO: handle exception
+			log.info("---test--Exception:"+e.getMessage());
+		}
+	}
+	
+	/**
+	 * 测试自己数据库链接是否可用
+	 */
+	public void testMeSqlUrl(){
+		try {
+			HttpServletResponse response = ServletActionContext.getResponse();
+			response.setCharacterEncoding("UTF-8");
+			response.setContentType("application/json; charset=utf-8");
+			Map<String,String> map = new HashMap<String,String>();
+			List<Atsmart_police_info> list = policeInfoService.getPoliceInfo(map);
+			log.info("--list:"+list);
+			if(list.size()>0){
+				response.getWriter().write("{\"status\":\"00\",\"retMsg\":\"成功\"}");
+			}else{
+				response.getWriter().write("{\"status\":\"01\",\"retMsg\":\"失败,自己数据库无法使用\"}");			
+			}
 			return;
 		} catch (Exception e) {
 			// TODO: handle exception

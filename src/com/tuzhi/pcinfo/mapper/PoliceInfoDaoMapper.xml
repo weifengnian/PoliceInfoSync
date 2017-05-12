@@ -8,9 +8,11 @@
 	
 	<!-- 查询警员信息  -->
 	<select id="getPoliceInfo" parameterType="map" resultMap="resultPoliceInfo">
-		select a.* from atsmart_police_info a 
+		select top 1 a.* from atsmart_police_info a 
 		 where 1=1 
-		 and card_id=#{card_id}
+		 <if test="card_id !=null and  card_id !='' ">
+			and card_id=#{card_id}
+		 </if>
 	</select>
 	
 	<!-- 删除警员信息 -->

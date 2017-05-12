@@ -32,11 +32,11 @@
 	<bean id="PoliceInfo_tb" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
 		<!-- 所要调用的bean（类） -->
 		<property name="targetObject">
-		   <bean class="com.tuzhi.pcinfo.manager.PoliceInfoAction"></bean>
+		   <bean class="com.tuzhi.pcinfo.util.TimedTask"></bean>
 		</property>
 		<!--  类里面的方法名字 -->
 		<property name="targetMethod">
-		   <value>plice_info</value><!--targetMethod值待定 -->
+		   <value>plice_infoRun</value><!--targetMethod值待定 -->
 		</property>
 	</bean>
 	
@@ -57,11 +57,11 @@
 	<bean id="organaization" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
 		<!-- 所要调用的bean（类） -->
 		<property name="targetObject">
-		   <bean class="com.tuzhi.pcinfo.manager.PoliceInfoAction"></bean>
+		   <bean class="com.tuzhi.pcinfo.util.TimedTask"></bean>
 		</property>
 		<!--  类里面的方法名字 -->
 		<property name="targetMethod">
-		   <value>organaization</value><!--targetMethod值待定 -->
+		   <value>organaizationRun</value><!--targetMethod值待定 -->
 		</property>
 	</bean>
 	

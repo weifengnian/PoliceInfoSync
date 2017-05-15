@@ -29,14 +29,39 @@
 	</bean>
 	
 	<!-- 定时任务2 -->
-	<bean id="PoliceInfo_tb" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+	<bean id="organaizationtb" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
 		<!-- 所要调用的bean（类） -->
 		<property name="targetObject">
-		   <bean class="com.tuzhi.pcinfo.util.TimedTask"></bean>
+		   <bean class="com.tuzhi.pcinfo.manager.PoliceInfoAction"></bean>
 		</property>
 		<!--  类里面的方法名字 -->
 		<property name="targetMethod">
-		   <value>plice_infoRun</value><!--targetMethod值待定 -->
+		   <value>organaization</value><!--targetMethod值待定 -->
+		</property>
+	</bean>
+	
+	<!-- 定义类（PoliceInfoAction）的方法在何时执行 -->
+	<!-- PoliceInfoAction名称待定 -->
+	<bean id="organaization_tb" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<!--  计划中的JobDetail -->
+		<property name="jobDetail">
+			<ref local="organaizationtb" />
+		</property>
+		<property name="cronExpression">
+			<value>0 0/0 2 * * ?</value>
+		</property>
+	</bean>
+	
+	
+	<!-- 定时任务3 -->
+	<bean id="PoliceInfo_tb" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<!-- 所要调用的bean（类） -->
+		<property name="targetObject">
+		   <bean class="com.tuzhi.pcinfo.manager.PoliceInfoAction"></bean>
+		</property>
+		<!--  类里面的方法名字 -->
+		<property name="targetMethod">
+		   <value>plice_info</value><!--targetMethod值待定 -->
 		</property>
 	</bean>
 	
@@ -46,31 +71,6 @@
 		<!--  计划中的JobDetail -->
 		<property name="jobDetail">
 			<ref local="PoliceInfo_tb" />
-		</property>
-		<property name="cronExpression">
-			<value>0 0/0 2 * * ?</value>
-		</property>
-	</bean>
-	
-	
-	<!-- 定时任务3 -->
-	<bean id="organaization" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
-		<!-- 所要调用的bean（类） -->
-		<property name="targetObject">
-		   <bean class="com.tuzhi.pcinfo.util.TimedTask"></bean>
-		</property>
-		<!--  类里面的方法名字 -->
-		<property name="targetMethod">
-		   <value>organaizationRun</value><!--targetMethod值待定 -->
-		</property>
-	</bean>
-	
-	<!-- 定义类（PoliceInfoAction）的方法在何时执行 -->
-	<!-- PoliceInfoAction名称待定 -->
-	<bean id="organaization_tb" class="org.springframework.scheduling.quartz.CronTriggerBean">
-		<!--  计划中的JobDetail -->
-		<property name="jobDetail">
-			<ref local="organaization" />
 		</property>
 		<property name="cronExpression">
 			<value>0 25 2 * * ?</value>
@@ -84,8 +84,8 @@
 		<property name="triggers">
 			<list>
 				<ref local="PoliceInfoAction" />
-				<ref local="PoliceInfoAction_tb" />
 				<ref local="organaization_tb" />
+				<ref local="PoliceInfoAction_tb" />
 			</list>
 		</property>
 	</bean>

@@ -79,10 +79,7 @@ public class PoliceInfoAction extends HttpServlet {
 	public void plice_info(){
 		try {
 			//应用认证协议（Register）
-			Map<String,String> map = new HashMap<String,String>();
-			map.put("123", "123");
-			String json = JSON.encode(map);
-			String rltRegisterStr = HttpClientUtil.jsonDoPost(TransUtil.REGISTER+"plice_info_tb", json, TransUtil.ENCODING);
+			String rltRegisterStr = HttpClientUtil.doGet(TransUtil.REGISTER+"plice_info_tb",TransUtil.ENCODING);
 			log.info("--plice_info:"+rltRegisterStr);
 			return;
 		} catch (Exception e) {
@@ -94,10 +91,7 @@ public class PoliceInfoAction extends HttpServlet {
 	public void organaization(){
 		try {
 			//应用认证协议（Register）
-			Map<String,String> map = new HashMap<String,String>();
-			map.put("123", "123");
-			String json = JSON.encode(map);
-			String rltRegisterStr = HttpClientUtil.jsonDoPost(TransUtil.REGISTER+"organaization_tb", json, TransUtil.ENCODING);
+			String rltRegisterStr = HttpClientUtil.doGet(TransUtil.REGISTER+"organaization_tb",TransUtil.ENCODING);
 			log.info("--organaization:"+rltRegisterStr);
 			return;
 		} catch (Exception e) {

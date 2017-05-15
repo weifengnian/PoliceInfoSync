@@ -51,6 +51,8 @@ public class PoliceInfoService implements IPoliceInfoService {
 	        map.put("topdeptid", ""); 
 	        String json = JSON.encode(map);
 	        String rltOrganizationStr = HttpClientUtil.jsonDoPost(TransUtil.REGISTER+"organization", json, TransUtil.ENCODING);
+	        policeInfoDao.deleteOrganization(map);
+			policeInfoDao.deletePoliceInfo(map);
 	        //组织
 	        organization(rltOrganizationStr);
 		} catch (Exception e) {
@@ -84,15 +86,14 @@ public class PoliceInfoService implements IPoliceInfoService {
 	}
 	
 	//删除，添加组织
-	@SuppressWarnings("unused")
 	public void adOgz(JSONObject oj1){
 		Map<String, String> map = new HashMap<String, String>();
 		//构建组织信息（map）
 		StringUtil.pcOrganizationInfo(oj1,map);
 		//先删除组织
-		int num = policeInfoDao.deleteOrganization(map);
+//		int num = policeInfoDao.deleteOrganization(map);
 		//添加组织信息
-		num = policeInfoDao.addOrganization(map);
+		policeInfoDao.addOrganization(map);
 		
 		/**
 		 * 查询警员信息
@@ -114,7 +115,6 @@ public class PoliceInfoService implements IPoliceInfoService {
 	}
 	
 	//警员详细
-	@SuppressWarnings("unused")
 	public Map<String, String> policeInfoDetail(String jsonStr,String organ_code){
 		Map<String, String> map = new HashMap<String, String>();
 		JSONObject jsonObject  = JSONObject.fromObject(jsonStr);
@@ -141,10 +141,10 @@ public class PoliceInfoService implements IPoliceInfoService {
 				    	String resultDetailJson = ob.getString("result");
 				    	if("0".equals(stu) && resultDetailJson.length()>2){
 				    		StringUtil.pcMap(map1,resultDetailJson,map,organ_code);
-				    		//删除警员信息
-				    		int num = policeInfoDao.deletePoliceInfo(map);
+//				    		//删除警员信息
+//				    		int num = policeInfoDao.deletePoliceInfo(map);
 				    		//添加警员信息
-				    		num = policeInfoDao.addPoliceInfo(map);
+				    		policeInfoDao.addPoliceInfo(map);
 				    	}
 				    }
 				}

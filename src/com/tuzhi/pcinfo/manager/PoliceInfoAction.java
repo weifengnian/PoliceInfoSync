@@ -100,6 +100,19 @@ public class PoliceInfoAction extends HttpServlet {
 		}
 	}
 	
+	//执行存储过程
+	public void executeProcedure(){
+		try {
+			Map<String,String> map = new HashMap<String,String>();
+			//执行存储过程
+			policeInfoService.executeProcedure(map);
+			return;
+		} catch (Exception e) {
+			// TODO: handle exception
+			log.info("---organaization--Exception:"+e.getMessage());
+		}
+	}
+	
 	/**
 	 * 测试
 	 */

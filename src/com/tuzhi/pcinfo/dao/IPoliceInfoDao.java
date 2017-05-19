@@ -71,4 +71,11 @@ public interface IPoliceInfoDao {
 	 */
 	public Integer deleteOrganization(Map<String, String> map);
 	
+	/**
+	 * 执行存储过程
+	 * @param JsonStr
+	 * @return
+	 */
+	public String executeProcedure(Map<String, String> map);
+	
 }

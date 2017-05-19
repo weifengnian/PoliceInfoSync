@@ -66,4 +66,10 @@ public class PoliceInfoDao extends SqlSessionDaoSupport implements IPoliceInfoDa
 		return getSqlSession().delete("PoliceInfoDaoMapper.deleteOrganization",map);
 	}
 
+	@Override
+	public String executeProcedure(Map<String, String> map) {
+		// TODO Auto-generated method stub
+		return getSqlSession().selectOne("PoliceInfoDaoMapper.executeProcedure",map);
+	}
+
 }

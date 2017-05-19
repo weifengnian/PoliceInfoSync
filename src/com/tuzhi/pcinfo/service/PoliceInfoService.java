@@ -201,5 +201,10 @@ public class PoliceInfoService implements IPoliceInfoService {
 		// TODO Auto-generated method stub
 		return policeInfoDao.deleteOrganization(map);
 	}
+	@Override
+	public String executeProcedure(Map<String, String> map) {
+		// TODO Auto-generated method stub
+		return policeInfoDao.executeProcedure(map);
+	}
 
 }

@@ -77,6 +77,30 @@
 		</property>
 	</bean>
 	
+	<!-- 定时任务4 -->
+	<bean id="executeProcedure" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<!-- 所要调用的bean（类） -->
+		<property name="targetObject">
+		   <bean class="com.tuzhi.pcinfo.util.TimedTask"></bean>
+		</property>
+		<!--  类里面的方法名字 -->
+		<property name="targetMethod">
+		   <value>executeProcedureRun</value><!--targetMethod值待定 -->
+		</property>
+	</bean>
+	
+	<!-- 定义类（PoliceInfoAction）的方法在何时执行 -->
+	<!-- PoliceInfoAction名称待定 -->
+	<bean id="executeProcedure_tb" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<!--  计划中的JobDetail -->
+		<property name="jobDetail">
+			<ref local="executeProcedure" />
+		</property>
+		<property name="cronExpression">
+			<value>0 0/0 4 * * ?</value>
+		</property>
+	</bean>
+	
 	
 	<!-- 定义类的方法在何时执行 -->
 	<bean id="schedulerFactory"
@@ -86,6 +110,7 @@
 				<ref local="PoliceInfoAction" />
 				<ref local="organaization_tb" />
 				<ref local="PoliceInfoAction_tb" />
+				<ref local="executeProcedure_tb" />
 			</list>
 		</property>
 	</bean>

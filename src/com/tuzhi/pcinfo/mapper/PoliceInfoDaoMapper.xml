@@ -234,4 +234,12 @@
 	   )
 	</insert>
 	
+	
+	<!-- 执行存储过程 -->
+	<select id="executeProcedure" statementType="CALLABLE" parameterType="map">
+		<![CDATA[
+ 			  {call biz_police_data_synchronization()}
+		]]>
+	</select>
+	
 </mapper>
